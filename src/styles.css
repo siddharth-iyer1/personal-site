@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&display=swap');
+
+:root { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #292c29; background: #faf9f6; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; font-weight: 400; line-height: 1.6; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: inherit; text-decoration-color: #959d8d; text-underline-offset: 5px; }
+a:hover { color: #4c653e; text-decoration-color: currentColor; }
+a:focus-visible { outline: 2px solid #4c653e; outline-offset: 6px; border-radius: 2px; }
+.site-shell { max-width: 824px; padding: 0 40px; margin: 0 auto; display: flex; flex-direction: column; }
+.site-header { display: flex; align-items: center; justify-content: flex-start; gap: 30px; padding: 28px 0 0; }
+.wordmark { font-size: 18px; font-weight: 650; letter-spacing: -.6px; text-decoration: none; white-space: nowrap; }
+.wordmark span { color: #637951; }
+nav { display: flex; gap: 15px; align-items: center; font-size: 13px; }
+nav a { text-decoration: none; color: #696b65; }
+nav a.active { color: #30372b; font-weight: 600; }
+h1 a, h2 a, h3 a { text-decoration: none; }
+.unavailable { color: #777971; cursor: default; }
+.file-label { font-size: 9px; margin-left: 3px; letter-spacing: .3px; }
+main { padding: 38px 0 28px; outline: none; }
+.page-heading { margin-bottom: 26px; }
+.eyebrow { text-transform: uppercase; color: #66735c; font-size: 10px; letter-spacing: 1.8px; font-weight: 600; margin: 0 0 8px; }
+h1 { font-size: clamp(28px, 5vw, 34px); line-height: 1.2; letter-spacing: -1px; font-weight: 550; margin: 0 0 10px; }
+.lead { color: #70736a; font-size: 17px; margin: 0; }
+h2 { font-size: 17px; font-weight: 600; letter-spacing: -.3px; line-height: 1.45; margin: 0 0 10px; }
+p { margin: 0 0 12px; font-size: 15px; }
+.about p { max-width: 640px; }
+.contact { margin-top: 26px; }
+.muted { color: #777970; }
+footer { border-top: 1px solid #e4e4dc; padding: 16px 0 24px; display: flex; justify-content: space-between; gap: 20px; font-size: 11px; color: #7b7e74; }
+footer div { display: flex; gap: 19px; }
+footer a { text-decoration: none; }
+.project-row { display: flex; justify-content: space-between; align-items: baseline; gap: 25px; padding: 16px 0; border-bottom: 1px solid #e4e4dc; text-decoration: none; }
+.project-row:first-child { border-top: 1px solid #e4e4dc; }
+.project-row h2 { margin-bottom: 7px; }
+.project-row p { color: #777970; margin: 0; font-size: 14px; }
+.entry-date { font-size: 12px; color: #7b7e74; white-space: nowrap; }
+.experience { display: grid; grid-template-columns: 140px 1fr; gap: 22px; padding: 18px 0; border-top: 1px solid #e4e4dc; }
+.experience h2 { margin-bottom: 4px; }
+.company { font-size: 14px; color: #69735f; }
+.experience ul { padding-left: 18px; margin: 0; font-size: 14px; }
+.experience li { padding-left: 4px; margin-bottom: 10px; }
+.resume-note { margin-top: 24px; font-size: 13px; color: #777970; }
+.back-link { display: inline-block; font-size: 12px; margin-bottom: 20px; color: #70736a; text-decoration: none; }
+.project-heading { margin-bottom: 26px; }
+.technologies { margin: 20px 0 0; font-size: 12px; color: #747a6c; }
+.project-links { display: flex; gap: 24px; margin-top: 20px; font-size: 13px; }
+.project-photos { margin-top: 26px; }
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 18px; }
+.gallery-single { grid-template-columns: 1fr; }
+figure { margin: 0; min-width: 0; }
+.photo-link { display: block; }
+figure img { display: block; width: 100%; height: auto; border-radius: 4px; background: #efeee7; }
+figcaption { font-size: 12px; color: #777970; margin-top: 9px; }
+.photo-placeholder { text-align: center; background: #f0f0e9; border: 1px dashed #d7dacd; padding: 62px 20px; border-radius: 4px; color: #747a6c; }
+.photo-placeholder > span { font-size: 27px; }
+.photo-placeholder p { margin: 10px 0 2px; }
+.photo-placeholder small { font-size: 11px; }
+.skip-link { position: absolute; left: 15px; top: -100px; background: #faf9f6; padding: 10px; z-index: 5; }
+.skip-link:focus { top: 10px; }
+@media (max-width: 620px) {
+  .site-shell { padding: 0 24px; }
+  .site-header { align-items: flex-start; flex-direction: column; gap: 12px; padding-top: 24px; }
+  nav { gap: 15px; font-size: 13px; flex-wrap: wrap; }
+  main { padding: 30px 0 24px; }
+  .page-heading { margin-bottom: 24px; }
+  .experience { grid-template-columns: 1fr; gap: 5px; }
+  .experience .entry-date { margin-bottom: 8px; }
+  .gallery { grid-template-columns: 1fr; }
+  footer { flex-wrap: wrap; }
+}
