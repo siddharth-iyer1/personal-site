@@ -28,9 +28,7 @@ function ResumeLink() {
 function Home() {
   return <>
     <header className="page-heading home-heading">
-      <p className="eyebrow">{profile.role}</p>
       <h1>Hi, I’m {profile.name}.</h1>
-      <p className="lead">{profile.intro}</p>
     </header>
     <section className="about" aria-labelledby="about-title">
       <h2 id="about-title">A little about me</h2>
@@ -52,9 +50,9 @@ function ExperiencePage() {
 }
 
 function ProjectsPage() {
-  return <><header className="page-heading"><p className="eyebrow">Made with curiosity</p><h1>Projects</h1><p className="lead">A collection of things I’ve built.</p></header>
+  return <><header className="page-heading"><h1>Projects &amp; side quests</h1><p className="lead">Engineering work and things I explore beyond it.</p></header>
     <div className="project-list">{projects.map(project => <article className="project-row" key={project.slug}>
-      <div><h2><Link to={`/projects/${project.slug}`}>{project.title}</Link></h2><p>{project.summary}</p></div><span className="entry-date">{project.year}</span>
+      <div><div className="project-title"><h2><Link to={`/projects/${project.slug}`}>{project.title}</Link></h2><span className="project-tag">{project.category}</span></div><p>{project.summary}</p></div>{project.year && <span className="entry-date">{project.year}</span>}
     </article>)}</div>
   </>
 }
@@ -64,14 +62,13 @@ function ProjectPage() {
   const project = projects.find(item => item.slug === slug)
   if (!project) return <NotFound />
   return <><Link className="back-link" to="/projects">← All projects</Link>
-    <header className="page-heading project-heading"><p className="eyebrow">{project.year}</p><h1>{project.title}</h1><p className="lead">{project.summary}</p>
+    <header className="page-heading project-heading"><p className="project-meta"><span className="project-tag">{project.category}</span>{project.context && <span>{project.context}</span>}{project.year && <span>{project.year}</span>}</p><h1>{project.title}</h1><p className="lead">{project.summary}</p>
     <p className="technologies">{project.technologies.join(' / ')}</p>
     {(project.sourceUrl || project.liveUrl) && <div className="project-links">{project.sourceUrl && <a href={project.sourceUrl}>Source code ↗</a>}{project.liveUrl && <a href={project.liveUrl}>Visit project ↗</a>}</div>}
     </header>
+    {project.poster && <div className="project-poster"><Photo image={project.poster} /></div>}
     <section aria-labelledby="overview-title"><h2 id="overview-title">Overview</h2>{project.paragraphs.map(text => <p key={text}>{text}</p>)}</section>
-    <section className="project-photos" aria-labelledby="photos-title"><h2 id="photos-title">A closer look</h2>
-    {project.images.length ? <PhotoGallery images={project.images} /> : <div className="photo-placeholder"><span aria-hidden="true">▧</span><p>Project pictures go here.</p><small>Sample content · Add screenshots or photos of your work.</small></div>}
-    </section>
+    {project.images.length > 0 && <section className="project-photos" aria-labelledby="photos-title"><h2 id="photos-title">A closer look</h2><PhotoGallery images={project.images} /></section>}
   </>
 }
 
