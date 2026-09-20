@@ -88,7 +88,10 @@ figcaption { font-size: 12px; color: #777970; margin-top: 9px; }
   main { padding: 30px 0 24px; }
   .page-heading { margin-bottom: 24px; }
   .home-intro { grid-template-columns: 1fr; gap: 18px; }
-  .home-portrait-frame { width: 135px; height: 150px; }
+  .home-intro-copy { display: contents; }
+  .home-intro h1 { grid-row: 1; margin-bottom: 0; }
+  .home-intro p { grid-row: 3; }
+  .home-portrait-frame { grid-row: 2; width: 135px; height: 150px; }
   .experience { grid-template-columns: 1fr; gap: 5px; }
   .experience .entry-date { margin-bottom: 8px; }
   .gallery { grid-template-columns: 1fr; }

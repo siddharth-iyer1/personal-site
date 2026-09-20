@@ -61,7 +61,7 @@ function ProjectVideo({ video }: { video: NonNullable<Project['mediaVideo']> }) 
 function Home() {
   return <>
     <div className="home-intro">
-      <div>
+      <div className="home-intro-copy">
         <h1>Hi, I’m {profile.name}</h1>
         <p>{profile.about[0]}</p>
       </div>
