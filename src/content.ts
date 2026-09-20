@@ -30,6 +30,14 @@ export type Project = {
   paragraphs: string[]
   poster?: ProjectImage
   images: ProjectImage[]
+  production?: {
+    beforeLink: string
+    linkText: string
+    linkUrl: string
+    afterLink: string
+    images: ProjectImage[]
+  }
+  videos?: { id: string; title: string }[]
   sourceUrl?: string
   liveUrl?: string
 }
@@ -37,8 +45,9 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: 'privacycheck',
-    title: 'PrivacyCheck',
+    title: 'PrivacyCheck, a project for the UT Center for Identity',
     category: 'Engineering',
+    year: '2025',
     context: 'UT Center for Identity',
     summary: 'Tools to understand privacy risks across apps and websites, tailored to what matters to you.',
     technologies: ['React', 'Python', 'FastAPI', 'AWS', 'GPT-4o', 'GPT-4o mini'],
@@ -57,6 +66,54 @@ export const projects: Project[] = [
     },
     images: [],
   },
+  {
+    slug: 'texas-raas',
+    title: 'Texas Raas Dance Team',
+    category: 'Side quest',
+    year: '2021–2025',
+    context: 'Member & Captain · 2021–2025',
+    summary: 'Four years of dance, production, and learning to lead.',
+    technologies: [],
+    paragraphs: [
+      'I was a member of the Texas Raas Dance Team from 2021-2025, and I served as captain in my final year of college. Although dance was new to me, I found that the team was an amazing outlet for performance and to feel as though I was part of something bigger than myself.',
+      "As a team, we were quite successful, having placed at the Raas All-Stars National Championship in 2022, 2023, and 2024. In my final year, though we had many setbacks and losses, I learned many tough, but important lessons about leadership under adversity, iterating through several rounds of feedback, and how to persevere when everything seems like it's going wrong.",
+    ],
+    production: {
+      beforeLink: "It wasn't just dance that we got to do. We had the opportunity to build beautiful productions to bring the audience into the world of our sets' themes. Furthermore, I had a hand in music production to develop our mixes, engineering props for our performance (linked here are ",
+      linkText: '“fireworks,”',
+      linkUrl: 'https://ishan-chhatbar.com/led-firework-canvas/',
+      afterLink: ' a project my friends Jay and Ishan led), and so much more.',
+      images: [
+        { src: '/images/raas-set-building.png', alt: 'Team members assembling a painted winter village backdrop in a makerspace.', caption: 'Developing the set.', width: 3024, height: 4032 },
+        { src: '/images/raas-train-prop.png', alt: 'A hand-painted blue and yellow Texas Raas Express train prop on the workshop floor.', caption: 'The Texas Raas Express.', width: 4284, height: 5712 },
+      ],
+    },
+    videos: [
+      { id: 'a56SeuEItkc', title: 'Texas Raas performance 1' },
+      { id: 'x3LoaJe83bY', title: 'Texas Raas performance 2' },
+      { id: 'EBr6-f8xkk8', title: 'Texas Raas performance 3' },
+      { id: '4iL-YvaZ9ds', title: 'Texas Raas performance 4' },
+    ],
+    images: [],
+  },
+  {
+    slug: 'whole-foods-sustainable-packaging',
+    title: 'Whole Foods Market',
+    category: 'Side quest',
+    year: '2023',
+    context: 'Project Manager · Fall 2023',
+    summary: 'Researching sustainable food packaging through competitive analysis and rollout cost modeling.',
+    technologies: ['Excel'],
+    paragraphs: [
+      'In fall 2023, I served as project manager for a six-person team analyzing sustainable food packaging for Whole Foods Market.',
+      'We developed and presented a competitive analysis supported by a database of 20 competitors. The research brought together packaging approaches to support comparison across the market.',
+      'We also built Excel tools for calculating rollout costs, pairing the competitive research with a way to assess the costs of implementation.',
+    ],
+    images: [
+      { src: '/images/whole-foods-team.png', alt: 'Six project team members standing together in front of a Whole Foods Market sign.', caption: 'Our Whole Foods Market project team.', width: 1280, height: 960 },
+    ],
+  },
+
 ]
 
 export type Experience = {
@@ -103,6 +160,30 @@ export const experiences: Experience[] = [
     period: 'Jun 2023 — Aug 2023',
     highlights: [
       'Automated engineering-standards reviews across over 500 repositories, delivering on-demand findings through Slack. Built the Python service on AWS Fargate with Route 53 and an Application Load Balancer.',
+    ],
+  },
+  {
+    company: 'Kershner Trading Group',
+    role: 'Software Engineer Intern',
+    period: 'Jun 2022 — Aug 2022',
+    highlights: [
+      'Built trader view dashboards for equities traders and wrote scripts to backtest trading strategies. Also had the fun opportunity to make trades on my own with beginner capital!',
+    ],
+  },
+  {
+    company: 'Applied Research Laboratories (ARL:UT)',
+    role: 'Software Engineer Intern',
+    period: 'Jun 2021 — Aug 2021',
+    highlights: [
+      'Built a data-transfer engine to convert live multicast messages into JSON and Pandas DataFrames, with command-line editing tools for satellite-data workflows.',
+    ],
+  },
+  {
+    company: 'Code Ninjas',
+    role: 'Code Sensei',
+    period: 'Aug 2019 — May 2021',
+    highlights: [
+      'Led beginner programming lessons for students aged 5-14. Taught primarily JavaScript, using a game-dev structured curriculum.',
     ],
   },
 ]

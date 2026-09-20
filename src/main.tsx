@@ -62,13 +62,26 @@ function ProjectPage() {
   const project = projects.find(item => item.slug === slug)
   if (!project) return <NotFound />
   return <><Link className="back-link" to="/projects">← All projects</Link>
-    <header className="page-heading project-heading"><p className="project-meta"><span className="project-tag">{project.category}</span>{project.context && <span>{project.context}</span>}{project.year && <span>{project.year}</span>}</p><h1>{project.title}</h1><p className="lead">{project.summary}</p>
-    <p className="technologies">{project.technologies.join(' / ')}</p>
+    <header className="page-heading project-heading"><p className="project-meta"><span className="project-tag">{project.category}</span>{(project.context || project.year) && <span>{project.context || project.year}</span>}</p><h1>{project.title}</h1><p className="lead">{project.summary}</p>
+    {project.technologies.length > 0 && <p className="technologies">{project.technologies.join(' / ')}</p>}
     {(project.sourceUrl || project.liveUrl) && <div className="project-links">{project.sourceUrl && <a href={project.sourceUrl}>Source code ↗</a>}{project.liveUrl && <a href={project.liveUrl}>Visit project ↗</a>}</div>}
     </header>
     {project.poster && <div className="project-poster"><Photo image={project.poster} /></div>}
-    <section aria-labelledby="overview-title"><h2 id="overview-title">Overview</h2>{project.paragraphs.map(text => <p key={text}>{text}</p>)}</section>
-    {project.images.length > 0 && <section className="project-photos" aria-labelledby="photos-title"><h2 id="photos-title">A closer look</h2><PhotoGallery images={project.images} /></section>}
+    <section aria-labelledby="overview-title"><h2 id="overview-title">Overview</h2>{project.paragraphs.map(text => <p key={text}>{text}</p>)}
+      {project.production && <div className="production-story">
+        <p>{project.production.beforeLink}<a href={project.production.linkUrl} target="_blank" rel="noreferrer">{project.production.linkText}</a>{project.production.afterLink}</p>
+        <PhotoGallery images={project.production.images} />
+      </div>}
+    </section>
+    {project.images.length > 0 && <div className="project-photos"><PhotoGallery images={project.images} /></div>}
+    {!!project.videos?.length && <section className="project-videos" aria-labelledby="performances-title">
+      <h2 id="performances-title">Performances</h2>
+      <p>Below are some of our performances!</p>
+      <div className="video-grid">{project.videos.map(video => <div key={video.id}>
+        <iframe src={`https://www.youtube.com/embed/${video.id}`} title={video.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+        <a className="video-link" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noreferrer">Watch on YouTube ↗<span className="sr-only"> — {video.title}</span></a>
+      </div>)}</div>
+    </section>}
   </>
 }
 
