@@ -38,7 +38,11 @@ export type Project = {
     images: ProjectImage[]
   }
   videos?: { id: string; title: string }[]
+  videoHeading?: string
+  videoIntro?: string
   sourceUrl?: string
+  mediaVideo?: { src: string; title: string; poster?: string; hls?: boolean }
+  liveLabel?: string
   liveUrl?: string
 }
 
@@ -65,6 +69,28 @@ export const projects: Project[] = [
       height: 2880,
     },
     images: [],
+  },
+  {
+    slug: 'a-rising-star',
+    title: 'A Rising Star, a project for UT’s JapanLab',
+    category: 'Side quest',
+    year: '2025',
+    context: 'UT JapanLab · 2025 · Unfinished prototype',
+    summary: 'A historical visual novel about an aspiring actress navigating fame and competing pressures in prewar and wartime Japan.',
+    technologies: ['Ren’Py', 'Python', 'Sound design'],
+    paragraphs: [
+      'Developed with UT’s JapanLab, this visual novel follows a young actress navigating the film industry in 1930s and ’40s Japan. Choices about roles and relationships bring artistic ambition into tension with commercial success, public expectations, and political pressure.',
+      'I was responsible for coding the visual novel story and sound design, working with a team spanning historical research, narrative, character art, and interface design. The prototype includes explorable scenes and local database storage for tracking characteristic scores.',
+      'The game did not complete development, but it offered a chance to bring narrative, persistent game state, and audio together in an interactive historical experience. JapanLab showcases the proof of concept under the title “Land of the Rising Star.”',
+    ],
+    images: [
+      { src: '/images/japanlab/scene-2.png', alt: 'Character artwork of Kiyo wearing a purple outfit and hat.', width: 1920, height: 1080 },
+      { src: '/images/japanlab/scene-3.png', alt: 'Character artwork of Setsuko wearing a green striped kimono.', width: 1920, height: 1080 },
+    ],
+    mediaVideo: { src: 'https://video.squarespace-cdn.com/content/v1/60a7070de7e1d63a614794d8/932ce7c5-1015-429e-84d4-3a6dfd2a7861/playlist.m3u8', title: 'Land of the Rising Star proof-of-concept showcase', poster: '/images/japanlab/scene-1.png', hls: true },
+    liveLabel: 'JapanLab showcase',
+    sourceUrl: 'https://github.com/siddharth-iyer1/star-team-japanlab',
+    liveUrl: 'https://www.utjapanlab.com/a-star-is-born',
   },
   {
     slug: 'texas-raas',
@@ -97,6 +123,58 @@ export const projects: Project[] = [
     images: [],
   },
   {
+    slug: 'assistive-vision',
+    title: 'Computer Vision for Assistive Technology',
+    category: 'Engineering',
+    year: '2024',
+    context: 'UT Austin · 2024',
+    summary: 'A stereo-vision prototype that translates object detection and distance estimates into audio feedback.',
+    technologies: ['Python', 'OpenCV', 'YOLO', 'NumPy'],
+    paragraphs: [
+      'This computer vision project explored how cameras and sound could help communicate the proximity of nearby objects to people with visual impairments.',
+      'The prototype combines calibrated stereo cameras with YOLO object detection. It estimates object distance by triangulating detections between the left and right camera views, then uses those estimates to generate audio feedback.',
+      'The work connects camera calibration, object detection, depth estimation, and sound into a single experimental pipeline. It is an assistive-technology prototype, rather than a validated navigation aid.',
+    ],
+    images: [{ src: '/images/computer-vision-cameras.png', alt: 'Testing a stereo camera setup using two webcams.', width: 4284, height: 5712, caption: 'Working with the stereo camera setup.' }],
+    mediaVideo: { src: '/videos/computer-vision-demo.mp4', title: 'Computer Vision prototype demonstration' },
+    sourceUrl: 'https://github.com/siddharth-iyer1/cv-final-visual-impairment-assistance',
+    videoHeading: 'Demo',
+    videoIntro: 'A demonstration of the prototype.',
+  },
+  {
+    slug: 'wampus-fyi',
+    title: 'wampus.fyi',
+    category: 'Engineering',
+    year: '2023',
+    context: 'HackTX · 2023',
+    summary: 'Crowdsourced housing data to help UT students compare rent, amenities, and proximity to campus.',
+    technologies: ['Python', 'Streamlit', 'Pandas', 'BigQuery', 'Google Maps API'],
+    paragraphs: [
+      'Finding an apartment in West Campus often means making a big decision with incomplete information. wampus.fyi was a team project built to make student housing more transparent, starting with roughly 100 survey responses from fellow students.',
+      'The application brings lease data into BigQuery and uses a Streamlit interface to compare apartments by rent, bedroom and bathroom count, amenities, and distance to campus destinations. Maps and rent-history charts help students explore both location and how prices vary with lease signing dates.',
+      'The project won first place and Best Use of Streamlit at HackTX 2023.',
+    ],
+    images: [{ src: '/images/wampus-hacktx.png', alt: 'The wampus.fyi team at HackTX 2023 with competition prizes.', width: 1280, height: 852, caption: 'HackTX 2023.' }],
+    liveUrl: 'https://devpost.com/software/wampus-fyi',
+    liveLabel: 'Devpost',
+    sourceUrl: 'https://github.com/siddharth-iyer1/wampusfyi',
+  },
+  {
+    slug: 'llp-engine',
+    title: 'LLP-Engine',
+    category: 'Engineering',
+    year: '2023',
+    summary: 'A Java library for expressing and running parallel algorithms through lattice-linear predicates.',
+    technologies: ['Java', 'Maven', 'Multithreading'],
+    paragraphs: [
+      'LLP-Engine explores a shared way to express parallel algorithms using lattice-linear predicates. Instead of building a separate execution framework for each problem, the library accepts functions describing when a state needs to advance, how it changes, and which other states it depends on.',
+      'The engine distributes work across Java threads and uses synchronized mailboxes for signaling. Its configurable stopping condition lets different algorithms share the same execution model.',
+      'Examples include prefix sum, Bellman–Ford, Prim’s algorithm, and optimal binary search trees. The repository includes generated test cases and a sequential solver to support evaluation.',
+    ],
+    images: [],
+    sourceUrl: 'https://github.com/siddharth-iyer1/LLP-Engine',
+  },
+  {
     slug: 'whole-foods-sustainable-packaging',
     title: 'Whole Foods Market',
     category: 'Side quest',
@@ -113,7 +191,6 @@ export const projects: Project[] = [
       { src: '/images/whole-foods-team.png', alt: 'Six project team members standing together in front of a Whole Foods Market sign.', caption: 'Our Whole Foods Market project team.', width: 1280, height: 960 },
     ],
   },
-
 ]
 
 export type Experience = {

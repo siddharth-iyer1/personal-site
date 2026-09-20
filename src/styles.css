@@ -53,6 +53,10 @@ footer a { text-decoration: none; }
 .project-links { display: flex; gap: 24px; margin-top: 20px; font-size: 13px; }
 .project-photos { margin-top: 26px; }
 .project-photos .gallery-single { max-width: 460px; }
+.project-photos .gallery-single img { max-height: 400px; object-fit: contain; object-position: left; background: transparent; }
+.native-video { margin-top: 28px; max-width: 560px; }
+.native-video h2 { font-size: 15px; }
+.native-video video { display: block; width: 100%; max-height: 360px; aspect-ratio: 16 / 9; background: #171717; border-radius: 4px; }
 .production-story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 280px); gap: 24px; align-items: start; margin-top: 22px; }
 .production-story .gallery { gap: 12px; }
 .production-story figcaption { font-size: 10px; }

@@ -1,7 +1,7 @@
 import { StrictMode, useEffect, useRef } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Link, NavLink, Route, Routes, useLocation, useParams } from 'react-router-dom'
-import { experiences, profile, projects, type ProjectImage } from './content'
+import { experiences, profile, projects, type Project, type ProjectImage } from './content'
 import './styles.css'
 
 export function Photo({ image }: { image: ProjectImage }) {
@@ -23,6 +23,39 @@ function ResumeLink() {
   return profile.resumeUrl
     ? <a href={profile.resumeUrl} target="_blank" rel="noreferrer">Resume <span className="file-label">PDF ↗</span></a>
     : <span className="unavailable" title="The resume PDF has not been added yet">Resume <span className="file-label">Soon</span></span>
+}
+
+function ProjectVideo({ video }: { video: NonNullable<Project['mediaVideo']> }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  useEffect(() => {
+    const element = ref.current
+    if (!element || !video.hls) return
+    let disposed = false
+    let destroy: (() => void) | undefined
+    void import('hls.js').then(({ default: Hls }) => {
+        if (disposed) return
+        if (!Hls.isSupported()) {
+          if (element.canPlayType('application/vnd.apple.mpegurl')) element.src = video.src
+          return
+        }
+        const hls = new Hls({ autoStartLoad: false })
+        // The source's low-resolution rendition is unavailable; use its full-HD stream.
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          const level = hls.levels.reduce((best, item, index, levels) => item.width > levels[best].width ? index : best, 0)
+          hls.loadLevel = level
+        })
+        hls.loadSource(video.src)
+        hls.attachMedia(element)
+        const start = () => hls.startLoad()
+        element.addEventListener('play', start, { once: true })
+        destroy = () => { element.removeEventListener('play', start); hls.destroy() }
+      })
+    return () => { disposed = true; destroy?.() }
+  }, [video.src, video.hls])
+  return <section className="native-video" aria-label={video.title}>
+    <h2>{video.title}</h2>
+    <video ref={ref} src={video.hls ? undefined : video.src} poster={video.poster} controls playsInline preload="metadata" aria-label={video.title} />
+  </section>
 }
 
 function Home() {
@@ -64,7 +97,7 @@ function ProjectPage() {
   return <><Link className="back-link" to="/projects">← All projects</Link>
     <header className="page-heading project-heading"><p className="project-meta"><span className="project-tag">{project.category}</span>{(project.context || project.year) && <span>{project.context || project.year}</span>}</p><h1>{project.title}</h1><p className="lead">{project.summary}</p>
     {project.technologies.length > 0 && <p className="technologies">{project.technologies.join(' / ')}</p>}
-    {(project.sourceUrl || project.liveUrl) && <div className="project-links">{project.sourceUrl && <a href={project.sourceUrl}>Source code ↗</a>}{project.liveUrl && <a href={project.liveUrl}>Visit project ↗</a>}</div>}
+    {(project.sourceUrl || project.liveUrl) && <div className="project-links">{project.sourceUrl && <a href={project.sourceUrl}>Source code ↗</a>}{project.liveUrl && <a href={project.liveUrl}>{project.liveLabel ?? 'Visit project'} ↗</a>}</div>}
     </header>
     {project.poster && <div className="project-poster"><Photo image={project.poster} /></div>}
     <section aria-labelledby="overview-title"><h2 id="overview-title">Overview</h2>{project.paragraphs.map(text => <p key={text}>{text}</p>)}
@@ -74,9 +107,10 @@ function ProjectPage() {
       </div>}
     </section>
     {project.images.length > 0 && <div className="project-photos"><PhotoGallery images={project.images} /></div>}
+    {project.mediaVideo && <ProjectVideo key={project.slug} video={project.mediaVideo} />}
     {!!project.videos?.length && <section className="project-videos" aria-labelledby="performances-title">
-      <h2 id="performances-title">Performances</h2>
-      <p>Below are some of our performances!</p>
+      <h2 id="performances-title">{project.videoHeading ?? 'Performances'}</h2>
+      <p>{project.videoIntro ?? 'Below are some of our performances!'}</p>
       <div className="video-grid">{project.videos.map(video => <div key={video.id}>
         <iframe src={`https://www.youtube.com/embed/${video.id}`} title={video.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
         <a className="video-link" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noreferrer">Watch on YouTube ↗<span className="sr-only"> — {video.title}</span></a>
