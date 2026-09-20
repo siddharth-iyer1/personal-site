@@ -11,7 +11,6 @@ a:focus-visible { outline: 2px solid #4c653e; outline-offset: 6px; border-radius
 .site-shell { max-width: 824px; padding: 0 40px; margin: 0 auto; display: flex; flex-direction: column; }
 .site-header { display: flex; align-items: center; justify-content: flex-start; gap: 30px; padding: 28px 0 0; }
 .wordmark { font-size: 18px; font-weight: 650; letter-spacing: -.6px; text-decoration: none; white-space: nowrap; }
-.wordmark span { color: #637951; }
 nav { display: flex; gap: 15px; align-items: center; font-size: 13px; }
 nav a { text-decoration: none; color: #696b65; }
 nav a.active { color: #30372b; font-weight: 600; }
@@ -20,12 +19,17 @@ h1 a, h2 a, h3 a { text-decoration: none; }
 .file-label { font-size: 9px; margin-left: 3px; letter-spacing: .3px; }
 main { padding: 38px 0 28px; outline: none; }
 .page-heading { margin-bottom: 26px; }
+.home-intro { display: grid; grid-template-columns: minmax(0, 1fr) 135px; gap: 30px; align-items: start; margin-bottom: 12px; }
+.home-intro h1 { margin-bottom: 18px; }
+.home-intro p { margin-bottom: 0; }
+.home-portrait-frame { width: 135px; height: 150px; overflow: hidden; border-radius: 5px; }
+.home-portrait { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; transform: scale(1.35); transform-origin: 50% 25%; }
 .eyebrow { text-transform: uppercase; color: #66735c; font-size: 10px; letter-spacing: 1.8px; font-weight: 600; margin: 0 0 8px; }
 h1 { font-size: clamp(28px, 5vw, 34px); line-height: 1.2; letter-spacing: -1px; font-weight: 550; margin: 0 0 10px; }
 .lead { color: #70736a; font-size: 17px; margin: 0; }
 h2 { font-size: 17px; font-weight: 600; letter-spacing: -.3px; line-height: 1.45; margin: 0 0 10px; }
 p { margin: 0 0 12px; font-size: 15px; }
-.about p { max-width: 640px; }
+.about p { max-width: none; }
 .contact { margin-top: 26px; }
 .muted { color: #777970; }
 footer { border-top: 1px solid #e4e4dc; padding: 16px 0 24px; display: flex; justify-content: space-between; gap: 20px; font-size: 11px; color: #7b7e74; }
@@ -83,6 +87,8 @@ figcaption { font-size: 12px; color: #777970; margin-top: 9px; }
   nav { gap: 15px; font-size: 13px; flex-wrap: wrap; }
   main { padding: 30px 0 24px; }
   .page-heading { margin-bottom: 24px; }
+  .home-intro { grid-template-columns: 1fr; gap: 18px; }
+  .home-portrait-frame { width: 135px; height: 150px; }
   .experience { grid-template-columns: 1fr; gap: 5px; }
   .experience .entry-date { margin-bottom: 8px; }
   .gallery { grid-template-columns: 1fr; }

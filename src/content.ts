@@ -73,7 +73,7 @@ export const projects: Project[] = [
   {
     slug: 'a-rising-star',
     title: 'A Rising Star, a project for UT’s JapanLab',
-    category: 'Side quest',
+    category: 'Engineering',
     year: '2025',
     context: 'UT JapanLab · 2025 · Unfinished prototype',
     summary: 'A historical visual novel about an aspiring actress navigating fame and competing pressures in prewar and wartime Japan.',

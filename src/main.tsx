@@ -60,13 +60,18 @@ function ProjectVideo({ video }: { video: NonNullable<Project['mediaVideo']> }) 
 
 function Home() {
   return <>
-    <header className="page-heading home-heading">
-      <h1>Hi, I’m {profile.name}.</h1>
-    </header>
-    <section className="about" aria-labelledby="about-title">
-      <h2 id="about-title">A little about me</h2>
-      {profile.about.map(text => <p key={text}>{text}</p>)}
-    </section>
+    <div className="home-intro">
+      <div>
+        <h1>Hi, I’m {profile.name}</h1>
+        <p>{profile.about[0]}</p>
+      </div>
+      <div className="home-portrait-frame">
+        <img className="home-portrait" src="/images/siddharth-portrait.png" alt="Siddharth Iyer smiling against an orange background" width="1248" height="1041" />
+      </div>
+    </div>
+    <div className="about">
+      {profile.about.slice(1).map(text => <p key={text}>{text}</p>)}
+    </div>
     <section className="contact" aria-labelledby="contact-title"><h2 id="contact-title">Get in touch</h2>
       {profile.email ? <p>You can reach me at <a href={`mailto:${profile.email}`}>{profile.email}</a>.</p> : <p className="muted">Contact links will be added here.</p>}
     </section>
@@ -83,7 +88,7 @@ function ExperiencePage() {
 }
 
 function ProjectsPage() {
-  return <><header className="page-heading"><h1>Projects &amp; side quests</h1><p className="lead">Engineering work and things I explore beyond it.</p></header>
+  return <><header className="page-heading"><h1>Projects &amp; Side Quests</h1><p className="lead">Engineering work and things I explore beyond it.</p></header>
     <div className="project-list">{projects.map(project => <article className="project-row" key={project.slug}>
       <div><div className="project-title"><h2><Link to={`/projects/${project.slug}`}>{project.title}</Link></h2><span className="project-tag">{project.category}</span></div><p>{project.summary}</p></div>{project.year && <span className="entry-date">{project.year}</span>}
     </article>)}</div>
@@ -140,7 +145,7 @@ function App() {
   }, [location.pathname])
   return <div className="site-shell">
     <a className="skip-link" href="#main">Skip to content</a>
-    <header className="site-header"><Link className="wordmark" to="/">{profile.name}<span aria-hidden="true">.</span></Link>
+    <header className="site-header"><Link className="wordmark" to="/">{profile.name}</Link>
       <nav aria-label="Main navigation"><NavLink to="/" end>Home</NavLink><NavLink to="/experience">Experience</NavLink><NavLink to="/projects">Projects</NavLink><ResumeLink /></nav>
     </header>
     <main id="main" ref={mainRef} tabIndex={-1}><Routes><Route path="/" element={<Home />} /><Route path="/experience" element={<ExperiencePage />} /><Route path="/projects" element={<ProjectsPage />} /><Route path="/projects/:slug" element={<ProjectPage />} /><Route path="*" element={<NotFound />} /></Routes></main>
